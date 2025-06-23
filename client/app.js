@@ -1,5 +1,5 @@
 // Configuration
-const API_BASE_URL = 'https://bangalore-home-price.onrender.com';
+const API_BASE_URL = 'https://pranavpa.pythonanywhere.com';
 
 // DOM Elements
 const form = document.getElementById('priceForm');
