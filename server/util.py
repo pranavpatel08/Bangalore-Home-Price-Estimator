@@ -1,6 +1,7 @@
 import pickle
 import json
 import numpy as np
+import os
 
 __locations = None
 __data_columns = None
@@ -23,20 +24,28 @@ def get_estimated_price(location, sqft, bhk, bath):
     return round(__model.predict([x])[0], 2)
 
 
-def load_saved_artifacts():
+def load_saved_artifacts(artifacts_path='./artifacts'):  # Added default parameter
     """Load the saved model and data columns"""
     print("loading saved artifacts...start")
     global __data_columns
     global __locations
     global __model
 
-    with open("./artifacts/columns.json", "r") as f:
+    # Use the provided path
+    columns_path = os.path.join(artifacts_path, "columns.json")
+    model_path = os.path.join(artifacts_path, "bangalore_RE_Price_model.pickle")
+    
+    print(f"Loading columns from: {columns_path}")
+    print(f"Loading model from: {model_path}")
+
+    with open(columns_path, "r") as f:
         __data_columns = json.load(f)['data_columns']
         __locations = __data_columns[3:]  # first 3 columns are sqft, bath, bhk
 
-    with open('./artifacts/bangalore_RE_Price_model.pickle', 'rb') as f:
+    with open(model_path, 'rb') as f:
         __model = pickle.load(f)
     
+    print(f"Loaded {len(__locations)} locations")
     print("loading saved artifacts...done")
 
 
