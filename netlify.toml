@@ -1,0 +1,16 @@
+[build]
+  base = "client"
+  publish = "."
+  
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://bangalore-home-price-api.onrender.com/:splat"
+  status = 200
+  force = true
