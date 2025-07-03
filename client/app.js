@@ -159,7 +159,8 @@ async function handleSubmit(e) {
 
 // Display the result
 function displayResult(price) {
-    priceSpan.textContent = price.toFixed(2) * 100;
+    price_formatted = price.toFixed(2) * 100000 
+    priceSpan.textContent = price_formatted.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     resultBox.style.display = 'block';
     resultBox.classList.add('show');
     
